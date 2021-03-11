@@ -1,0 +1,63 @@
+<!doctype html>
+
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Task Master</title>
+{% endblock %}
+
+{% block body %}
+
+<script>
+    window.onload = function() {
+    var session_email = '{{session_email}}';
+    if (session_email != 'logged_id'){
+        document.getElementById("front_login_button").style.display = 'none';
+    }
+}
+</script>
+
+<div class="statusbartext">
+    <p>asd</p>
+</div>
+<div class="content">
+    <h1 style="text-align: center;">Task Master</h1>
+
+    {% if tasks|length < 1 %}
+
+    <h4 style="text-align: center;">There are no tasks. Create one below!</h4>
+
+    {% else %}
+
+    <table>
+        <tr>
+            <th>Task</th>
+            <th>Added</th>
+            <th>Actions</th>
+            <th>User</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{task.content}}</td>
+                <td>{{task.date_created.date()}}</td>
+                <td>
+                    <a href="/delete/{{task.id}}">Delete</a>
+                    <br>
+                    <a href="/update/{{task.id}}">Update</a>
+                </td>
+                <td>{{task.user_id}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <div class="form">
+        <form action="/" method="POST">
+            <input type="text" name="content" id="content">
+            <input type="submit" value="Add task">
+            <br><br>
+            <a href="/login/" id='front_login_button'>Log in</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

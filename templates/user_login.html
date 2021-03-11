@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<script>
+    window.onload = function() {
+    var inv = '{{login_failed}}';
+    if (inv == 'True'){
+        document.getElementById("login_failed_html").innerHTML='Log in failed!';
+    }
+}
+</script>
+
+<body>
+
+    <div class="form">
+        <form action="/login/" method="POST">
+            <div style="text-align: center;">
+                <h1 style="text-align: center;">Log In</h1>
+                <h3>Email</h3>
+                <input type="text" name="email" id="email">
+                <br>
+                <h3>Password</h3>
+                <input type="password" name="password" id="password">
+                <br><br>
+                <input type="submit" value="Log In">
+                <p id='login_failed_html'></p>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
